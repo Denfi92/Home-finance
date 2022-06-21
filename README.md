@@ -1,4 +1,4 @@
-# vue-course
+### [Vue-CRM](https://vue-course-crm-vm.web.app/)
 
 ## Project setup
 ```
@@ -9,5 +9,3 @@ npm install
 ```
 npm run serve
 ```
-
-### [Vue-CRM](https://vue-course-crm-vm.web.app/)
