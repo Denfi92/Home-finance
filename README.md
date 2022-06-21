@@ -10,7 +10,7 @@ npm install
 npm run serve
 ```
 
-### [Vue-CRM](https://Denfi92.github.io/Home-finance/dist/)
+### [Vue-CRM](https://vue-course-crm-vm.web.app/)
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
