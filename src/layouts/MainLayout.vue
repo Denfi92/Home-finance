@@ -1,0 +1,64 @@
+<template>
+  <div>
+    <loader-component v-if="loading" />
+    <div class="app-main-layout" v-else>
+
+      <NavbarComponent @openSidebar="isOpen = !isOpen" />
+
+      <SidebarComponent v-model="isOpen" :key="locale" />
+
+      <main class="app-content" :class="{full: !isOpen}">
+        <div class="app-page">
+          <router-view />
+        </div>
+      </main>
+
+      <div class="fixed-action-btn" :key="locale + '1'">
+        <router-link
+          class="btn-floating btn-large blue"
+          to="/record"
+          v-tooltip="'CreateNewRecord'"
+          data-position="left"
+        >
+          <i class="large material-icons">add</i>
+        </router-link>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+import NavbarComponent from '@/components/app/NavbarComponent.vue';
+import SidebarComponent from '@/components/app/SidebarComponent.vue';
+import messages from '@/utlis/messages';
+
+export default {
+  name: 'main-layout',
+  data: () => ({
+    isOpen: true,
+    loading: true,
+  }),
+  async mounted() {
+    if (!Object.keys(this.$store.getters.info).length) {
+      await this.$store.dispatch('fetchInfo');
+    }
+    this.loading = false;
+  },
+  components: {
+    NavbarComponent, SidebarComponent,
+  },
+  computed: {
+    error() {
+      return this.$store.getters.error;
+    },
+    locale() {
+      return this.$store.getters.info.locale;
+    },
+  },
+  watch: {
+    error(fbError) {
+      this.$error(messages[fbError.code] || 'Что-то пошло не так');
+    },
+  },
+};
+</script>
